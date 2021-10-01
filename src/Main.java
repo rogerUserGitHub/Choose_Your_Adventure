@@ -20,6 +20,7 @@ public class Main {
 	int numHealthPots = 3; // max number of health potions
 	int healthPotionHealAmount = 30;
 	int healthPotionDropChance = 50; // = percentage
+	int numberOfEnemiesDefeated = 0;
 	
 	boolean running = true;
 	
@@ -28,7 +29,7 @@ public class Main {
 	// GAME is name/label of While loop
 	GAME:
 	while(running) {
-		System.out.println("------------");
+		System.out.println("-----------------------------------------------------");
 		
 		int enemyHealth = rand.nextInt(maxEnemyHealth);
 		String enemy = enemies[rand.nextInt(enemies.length)];
@@ -39,10 +40,10 @@ public class Main {
 		while(enemyHealth > 0) {
 			System.out.println("\tYour HP: " + health);
 			System.out.println("\t" + enemy + "'s HP: " + enemyHealth);
-			System.out.println("\n\tWhat would you like to do");
-			System.out.println("\t1. Attack");
-			System.out.println("\t2. Drink health potion");
-			System.out.println("\t3. Run!");
+			System.out.println("\n\tWhat would you like to do (type action)");
+			System.out.println("\t1. << Attack >>");
+			System.out.println("\t2. << Drink >> health potion");
+			System.out.println("\t3. << Run >>");
 			
 			String input = in.nextLine();
 				
@@ -61,7 +62,7 @@ public class Main {
 						break;
 					}		
 				} 
-				else if (input.equals("Potion")) {
+				else if (input.equals("Drink")) {
 					if(numHealthPots > 0) {
 						health += healthPotionHealAmount;
 						numHealthPots--;
@@ -84,16 +85,19 @@ public class Main {
 				}
 		}
 		 
-		// break out of while loop because healht is less than 1
+		// break out of while loop because health is less than 1
 		if(health < 1) {
 			System.out.println("you limp out of the dungeon, weak from battle");
 			break;
 		}
 		
-		System.out.println("------------");
+		System.out.println("----------------------------------------------------");
 		
 		System.out.println(" # " + enemy + " was defeated! #");
 		System.out.println(" # You have " + health + " HP left.  #");
+		numberOfEnemiesDefeated++;
+		System.out.println(" # You have deafeated " + numberOfEnemiesDefeated + " enemie(s)");
+		
 		
 		if(rand.nextInt(100) < healthPotionDropChance) {
 			numHealthPots++;
@@ -103,8 +107,8 @@ public class Main {
 		
 		System.out.println("------------");
 		System.out.println("What would you like to do now?");
-		System.out.println("1. Continue fighting");
-		System.out.println("2. Exit dungeon");
+		System.out.println("1. Continue");
+		System.out.println("2. Exit");
 		
 		String input = in.nextLine();
 		
